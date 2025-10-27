@@ -1,8 +1,10 @@
-import Button from "./components/button.jsx";
+import Button from "./components/Button.jsx";
+import Card from "./components/Card.jsx";
 const App = () => {
   return (
     <>
-      <Button />
+      {/* <Button /> */}
+      <Card />
     </>
   );
 };
