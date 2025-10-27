@@ -1,12 +1,12 @@
-import { motion } from "motion/react";
-const button = () => {
+import { motion } from "motion/react"
+const Button = () => {
   return (
     <div
       className="bg-neutral-950 flex-wrap h-screen w-full p-5 gap-x-5  flex items-start"
       style={{
         backgroundImage:
-          "radial-gradient(circle at 1px 1px, #242424 2px, transparent 0)",
-        backgroundSize: "18px 18px",
+          "radial-gradient(circle at 1px 1px, #242424 1px, transparent 0)",
+        backgroundSize: "28px 28px",
         backgroundRepeat: "repeat",
       }}
     >
@@ -46,4 +46,4 @@ const button = () => {
   );
 };
 
-export default button;
+export default Button;
