@@ -1,8 +1,8 @@
-import { motion } from "motion/react"
+import { motion } from "motion/react";
 const Button = () => {
   return (
     <div
-      className="bg-neutral-950 flex-wrap h-screen w-full p-5 gap-x-5  flex items-start"
+      className="flex h-screen w-full flex-wrap items-start gap-x-5 bg-neutral-950 p-5"
       style={{
         backgroundImage:
           "radial-gradient(circle at 1px 1px, #242424 1px, transparent 0)",
@@ -36,11 +36,11 @@ const Button = () => {
             duration: 0.2,
           },
         }}
-        className="group relative font-bold bg-black px-12 py-4 rounded-xl text-gray-500 "
+        className="group relative rounded-xl bg-black px-12 py-4 font-bold text-gray-500"
       >
         PRASHANT
-        <span className=" bg-linear-to-r from-transparent-0 via-cyan-500 to-transparent-0 h-px w-3/4 bottom-px  absolute inset-x-0 mx-auto " />
-        <span className="group-hover:opacity-100  blur-xs h-1 bg-linear-to-r from-transparent-0 via-cyan-500 to-transparent-0 w-full bottom-0 opacity-0  absolute inset-x-0 mx-auto " />
+        <span className="from-transparent-0 to-transparent-0 absolute inset-x-0 bottom-px mx-auto h-px w-3/4 bg-linear-to-r via-cyan-500" />
+        <span className="from-transparent-0 to-transparent-0 absolute inset-x-0 bottom-0 mx-auto h-1 w-full bg-linear-to-r via-cyan-500 opacity-0 blur-xs group-hover:opacity-100" />
       </motion.button>
     </div>
   );
