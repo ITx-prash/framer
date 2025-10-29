@@ -8,7 +8,7 @@ import {
   IconMessage,
 } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
-const Card = () => {
+const CardC = () => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -148,4 +148,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default CardC;
