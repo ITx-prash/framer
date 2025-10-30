@@ -1,7 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
+import { LogIn } from "lucide-react";
+
 const Card = () => {
   const [currentCard, setCurrentCard] = useState(null);
+  const [hovered, setHovered] = useState(null);
+
   const cardRef = useRef(null);
 
   useEffect(() => {
@@ -102,10 +106,29 @@ const Card = () => {
     },
   ];
 
+  const navItems = [
+    {
+      title: "Home",
+      href: "/",
+    },
+    {
+      title: "About",
+      href: "/about",
+    },
+    {
+      title: "Contact",
+      href: "/contact",
+    },
+    {
+      title: "Login",
+      href: "/login",
+    },
+  ];
+
   // The main concept of the switching between list and detailed view is implemented using layoutId prop from motion library. When a card is clicked, its layoutId matches the one in the detailed view, enabling a smooth transition i.e. from list to detailed view and vice versa since both views share the 'same' layoutId.
 
   return (
-    <div className="relative min-h-screen w-full bg-gray-100 py-40">
+    <div className="relative min-h-screen w-full bg-gray-100">
       {currentCard && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -127,7 +150,7 @@ const Card = () => {
           />
 
           <div className="flex items-center justify-between px-1">
-            <div className="flex pl-3 flex-col items-start">
+            <div className="flex flex-col items-start pl-3">
               <motion.h2
                 layoutId={`card-title-${currentCard.title}`}
                 className="font-semibold text-neutral-800"
@@ -165,50 +188,95 @@ const Card = () => {
           </motion.div>
         </motion.div>
       )}
-      {/* initial list*/}
-      <div className="mx-auto flex max-w-xl flex-col gap-8 px-4">
-        {cards.map((card, idx) => (
-          <motion.button
-            layoutId={`card-${card.title}`}
-            onClick={() => {
-              setCurrentCard(card);
-            }}
-            key={idx}
-            className="flex cursor-pointer items-center justify-between rounded-lg bg-white px-7 py-5 shadow-sm"
-          >
-            <div className="flex gap-4">
-              <motion.img
-                layoutId={`card-image-${card.title}`}
-                src={card.src}
-                alt={card.title}
-                className="aspect-square h-18 rounded-xl"
-              />
-              <div className="flex flex-col items-start pt-0.5">
-                <motion.h2
-                  layoutId={`card-title-${card.title}`}
-                  className="text-lg font-semibold text-neutral-900"
+      {/* initial navbar and card list container */}
+      <div className="flex flex-col gap-35">
+        <nav
+          className="mx-auto mt-7 w-full max-w-xl rounded-2xl shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+          onMouseLeave={() => setHovered(null)}
+        >
+          {/* Navigation Bar */}
+          <ul className="flex items-center justify-between px-6 py-2">
+            {navItems.map((item, idx) => (
+              <li key={idx} className="relative mx-auto">
+                <motion.a
+                  href={item.href}
+                  className="relative flex items-center gap-2 px-6 py-1 font-medium"
+                  onMouseEnter={() => {
+                    setHovered(idx);
+                  }}
                 >
-                  {card.title}
-                </motion.h2>
-                <motion.p
-                  layoutId={`card-description-${card.description}`}
-                  className="text-sm font-medium text-gray-500"
-                >
-                  {card.description}
-                </motion.p>
-              </div>
-            </div>
+                  {hovered === idx && (
+                    <motion.span
+                      transition={{
+                        duration: 0.3,
+                        type: "spring",
+                        stiffness: 100,
+                        mass: 0.5,
+                      }}
+                      layoutId="hover"
+                      className="absolute inset-0 rounded-full bg-black"
+                    />
+                  )}
 
-            <div className="flex flex-col items-center justify-center gap-4">
-              <motion.div
-                layoutId={`card-cta-${card.title}`}
-                className="cursor-pointer rounded-2xl bg-green-500 px-3 py-1 text-white"
-              >
-                {card.ctaText}
-              </motion.div>
-            </div>
-          </motion.button>
-        ))}
+                  <motion.span
+                    className="relative flex items-center gap-2"
+                    animate={{
+                      color: hovered === idx ? "#ffffff" : "#4b5563",
+                      // transition: { duration: 0.2},
+                    }}
+                  >
+                    {item.title === "Login" && <LogIn size={16} />}
+                    {item.title}
+                  </motion.span>
+                </motion.a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="mx-auto flex max-w-xl flex-col gap-8 px-4">
+          {cards.map((card, idx) => (
+            <motion.button
+              layoutId={`card-${card.title}`}
+              onClick={() => {
+                setCurrentCard(card);
+              }}
+              key={idx}
+              className="flex cursor-pointer items-center justify-between rounded-lg bg-white px-7 py-5 shadow-sm transition-colors hover:bg-gray-100"
+            >
+              <div className="flex gap-4">
+                <motion.img
+                  layoutId={`card-image-${card.title}`}
+                  src={card.src}
+                  alt={card.title}
+                  className="aspect-square h-18 rounded-xl"
+                />
+                <div className="flex flex-col items-start pt-0.5">
+                  <motion.h2
+                    layoutId={`card-title-${card.title}`}
+                    className="text-lg font-semibold text-neutral-900"
+                  >
+                    {card.title}
+                  </motion.h2>
+                  <motion.p
+                    layoutId={`card-description-${card.description}`}
+                    className="text-sm font-medium text-gray-500"
+                  >
+                    {card.description}
+                  </motion.p>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center justify-center gap-4">
+                <motion.div
+                  layoutId={`card-cta-${card.title}`}
+                  className="cursor-pointer rounded-2xl bg-green-500 px-3 py-1 text-white"
+                >
+                  {card.ctaText}
+                </motion.div>
+              </div>
+            </motion.button>
+          ))}
+        </div>
       </div>
     </div>
   );
