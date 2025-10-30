@@ -10,4 +10,4 @@ A personal project for exploring and practicing Framer Motion animations in Reac
 
 ## Live Demo
 
-🔗 [Add deployment link here]
+🔗 [View Live Project](https://framer.appwrite.network/)
