@@ -1,3 +1,4 @@
+import AnimateText from "./components/AnimateText.jsx";
 import Button from "./components/Button.jsx";
 import CardAcernity from "./components/Card_Acernity.jsx";
 import Home from "./pages/animation/Home.jsx";
@@ -10,7 +11,8 @@ const App = () => {
       {/* <CardAcernity /> */}
       {/* <Dashboard /> */}
       {/* <Home /> */}
-      <ExpandableCardList />
+      {/* <ExpandableCardList /> */}
+      <AnimateText/>
     </>
   );
 };
