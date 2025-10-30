@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AnimatePresence } from "motion/react";
 import Header from "./Header";
 import MiddleCard from "./MiddleCard";
 import MiniCard from "./MiniCard";
@@ -10,30 +11,28 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex">
-        <div>
+        <AnimatePresence mode="wait">
           {isopen ? (
-            <SidebarOpen isopen={isopen} setIsopen={setIsopen} />
+            <SidebarOpen key="open" isopen={isopen} setIsopen={setIsopen} />
           ) : (
-            <SidebarClosed isopen={isopen} setIsopen={setIsopen} />
+            <SidebarClosed key="closed" isopen={isopen} setIsopen={setIsopen} />
           )}
-        </div>
-      
-        <div className="flex-1 ">
-          <Header />
-          <div className="bg-gray-100 h-full  p-6 flex flex-col gap-6">
-            <div className="flex flex-wrap gap-6">
+        </AnimatePresence>
 
-            <MiniCard />
-            <MiniCard />
-            <MiniCard />
-            <MiniCard />
+        <div className="flex-1">
+          <Header />
+          <div className="flex h-full flex-col gap-6 bg-gray-100 p-6">
+            <div className="flex flex-wrap gap-6">
+              <MiniCard />
+              <MiniCard />
+              <MiniCard />
+              <MiniCard />
             </div>
             <div className="flex gap-6">
               <MiddleCard />
               <MiddleCard />
             </div>
           </div>
-          
         </div>
       </div>
     </>
